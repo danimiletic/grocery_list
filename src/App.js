@@ -20,9 +20,23 @@ class App extends Component {
   
   addItem = (incomingItem) => {
     const { items } = this.state
-    // const newItem = { id: this.getUniqId(), name: incomingItem.name, price: incomingItem.price, purchased: incomingItem.purchased }
     const newItem = { id: this.getUniqId(), ...incomingItem } 
     this.setState({ items: [...items, newItem]})
+  }
+
+  handleClick = (id) => {
+    const { items } = this.state;
+    this.setState({
+      items: items.map( item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            purchased: !item.purchased
+          }
+        }
+        return item
+      })
+    })
   }
 
 
@@ -32,7 +46,7 @@ class App extends Component {
   <>
    <h1>Grocery List</h1>
    <ItemForm addItem={this.addItem}/>
-   <ItemList items={items} listName="To Buy" /> 
+   <ItemList items={items} listName="To Buy" itemClick={this.handleClick} /> 
    </>
   )
  }

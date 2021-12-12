@@ -1,20 +1,21 @@
 import Item from './Item';
+const ItemList = ({ items, listName, itemClick }) => {
+return (
+  <>
+  <h2>{listName} List</h2>
 
-const ItemList = ({ items, listName }) => {
-  return (
-    <>
-    <h1>{listName} List</h1>
-  
-    <ul>
-    {
-      items.map ( items =>
-        <Item {...items}/>
-        )
-    }
-    </ul>
-  </>
-  )
+  <ul>
+    <li>
+  {
+    items.map ( item =>
+      <Item key={item.id} {...item} itemClick={itemClick} />
+      )
   }
-  
-  
-  export default ItemList;
+  </li>
+  </ul>
+</>
+)
+}
+
+
+export default ItemList;
